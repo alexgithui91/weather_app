@@ -2,7 +2,10 @@ import os
 import requests
 from django.shortcuts import render
 from dotenv import load_dotenv
+
+# from the_weather.weather.forms import CityForm
 from .models import City
+from .forms import CityForm
 
 # Load API Key
 load_dotenv()
@@ -15,7 +18,13 @@ def index(request):
         + api_key
     )
 
-    cities = City.objects.all()  # return all the cities in the databse
+    cities = City.objects.all()  # return all the cities in the database
+
+    if request.method == "post":
+        form = CityForm(request.post)
+        form.save()
+
+    form = CityForm()
 
     weather_data = []
 
@@ -32,6 +41,6 @@ def index(request):
 
         weather_data.append(weather)
 
-    context = {"weather_data": weather_data}
+    context = {"weather_data": weather_data, "form": form}
 
     return render(request, "weather/index.html", context)
