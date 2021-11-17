@@ -24,4 +24,6 @@ def index(request):
         "icon": city_weather["weather"][0]["icon"],
     }
 
+    context = {"weather": weather}
+
     return render(request, "weather/index.html")
