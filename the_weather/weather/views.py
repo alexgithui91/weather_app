@@ -26,4 +26,4 @@ def index(request):
 
     context = {"weather": weather}
 
-    return render(request, "weather/index.html")
+    return render(request, "weather/index.html", context)
