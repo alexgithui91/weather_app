@@ -2,8 +2,6 @@ import os
 import requests
 from django.shortcuts import render
 from dotenv import load_dotenv
-
-# from the_weather.weather.forms import CityForm
 from .models import City
 from .forms import CityForm
 
@@ -20,8 +18,8 @@ def index(request):
 
     cities = City.objects.all()  # return all the cities in the database
 
-    if request.method == "post":
-        form = CityForm(request.post)
+    if request.method == "POST":
+        form = CityForm(request.POST)
         form.save()
 
     form = CityForm()
